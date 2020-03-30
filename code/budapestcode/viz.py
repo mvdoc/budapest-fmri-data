@@ -19,7 +19,9 @@ def make_mosaic(data):
     # add extra slices top and bottom to make it divisible by 6
     dim1, dim2, dim3 = data.shape
     empty_slice = np.zeros((dim1, dim2, 1))
-    n_extra_slices = dim3 % 6
+    n_cols = 10
+    n_rows = int(np.ceil(dim3/n_cols))
+    n_extra_slices = n_cols*n_rows - dim3
     n_extra_slices_half = n_extra_slices // 2
     to_concat = [empty_slice] * n_extra_slices_half
     to_concat += [data]
@@ -27,9 +29,9 @@ def make_mosaic(data):
     if n_extra_slices % 2 != 0:
         to_concat += [empty_slice]
     t = np.concatenate(to_concat, -1)
-    assert t.shape[-1] % 6 == 0
-    # split into 6 rows
-    t = np.split(t, 6, -1)
+    assert t.shape[-1] == n_cols * n_rows
+    # split into rows
+    t = np.split(t, n_rows, -1)
     # make matrix with some magic
     t = np.vstack([tt.transpose(1, 0, 2).reshape(dim2, -1, order='F') for tt in t])
     # change order so that plots match standard mosaic order
