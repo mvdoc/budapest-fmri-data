@@ -8,18 +8,26 @@ def make_mosaic(data):
     
     Parameters
     ---------
-    data : array of shape (dim1, dim2, 58)
-        input volume (it assumes that it has 58 slices)
+    data : array of shape (dim1, dim2, dim3)
+        input volume
 
     Returns
     ------
-    mosaic : array of shape (6 * dim1, 10 * dim2)
+    mosaic : array
         mosaic matrix that can be plotted with matshow
     """
-    # add an extra slice top and bottom
+    # add extra slices top and bottom to make it divisible by 6
     dim1, dim2, dim3 = data.shape
     empty_slice = np.zeros((dim1, dim2, 1))
-    t = np.concatenate((empty_slice, data, empty_slice), -1)
+    n_extra_slices = dim3 % 6
+    n_extra_slices_half = n_extra_slices // 2
+    to_concat = [empty_slice] * n_extra_slices_half
+    to_concat += [data]
+    to_concat += [empty_slice] * n_extra_slices_half
+    if n_extra_slices % 2 != 0:
+        to_concat += [empty_slice]
+    t = np.concatenate(to_concat, -1)
+    assert t.shape[-1] % 6 == 0
     # split into 6 rows
     t = np.split(t, 6, -1)
     # make matrix with some magic
