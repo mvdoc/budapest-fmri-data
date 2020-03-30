@@ -5,6 +5,7 @@ import sys
 import matplotlib.pyplot as plt
 import nibabel as nib
 import nilearn.image as nimage
+import numpy as np
 import pandas as pd
 import seaborn as sns
 import scipy.linalg as la
@@ -15,7 +16,7 @@ from budapestcode.utils import compute_tsnr
 from budapestcode.viz import make_mosaic, plot_mosaic
 
 if len(sys.argv) < 2:
-    print(f"Usage: {os.basename(__file__)} subject_id")
+    print(f"Usage: {os.path.basename(__file__)} subject_id")
     sys.exit(1)
 
 subject = sys.argv[1]
@@ -50,16 +51,16 @@ os.makedirs(IMGOUT, exist_ok=True)
 
 # Save images
 print("Saving images")
-for i, mat in enumerate(mat_runs, 1):
-    fig = plot_matrix(mat, vmin=0, vmax=150, title=f'{subject}: run {i}');
+for i, mat in enumerate(mosaic_runs, 1):
+    fig = plot_mosaic(mat, vmin=0, vmax=150, title=f'{subject}: run {i}');
     plt.tight_layout()
     fnout = f'{subject}_tsnr-mosaic_run-{i:02d}.png'
     print(fnout)
     fig.savefig(f'{IMGOUT}/{fnout}', dpi=150, bbox_inches='tight')
-
+# median
 fnout = f'{subject}_tsnr-mosaic_run-median.png'
 print(fnout)
-plot_matrix(median_mat_run, vmin=0, vmax=150, title=f'{subject}: median tSNR');
+fig = plot_mosaic(mosaic_median_run, vmin=0, vmax=150, title=f'{subject}: median tSNR');
 fig.savefig(f'{IMGOUT}/{fnout}', dpi=150, bbox_inches='tight')
 
 
@@ -73,8 +74,8 @@ for mask_fn in mask_fns:
     bm = nib.load(mask_fns[0]).get_fdata()
     brainmask *= bm
 # plot it
-mat_brainmask = make_matrix(brainmask)
-fig = plot_matrix(mat_brainmask, vmin=0, vmax=1, title='Conjuction brainmask');
+mat_brainmask = make_mosaic(brainmask)
+fig = plot_mosaic(mat_brainmask, vmin=0, vmax=1, title='Conjuction brainmask');
 fnout = f'{subject}_brainmask-conjunction.png'
 print(fnout)
 fig.savefig(f'{IMGOUT}/{fnout}', dpi=150, bbox_inches='tight')
@@ -83,8 +84,6 @@ fig.savefig(f'{IMGOUT}/{fnout}', dpi=150, bbox_inches='tight')
 tsnr_runs_masked = [t[brainmask.astype(bool)] for t in tsnr_runs]
 # compute median
 tsnr_median_masked = np.median(tsnr_runs_masked, 0)
-
-
 tsnr_runs_masked.append(tsnr_median_masked)
 
 # make a pretty plot please
@@ -123,8 +122,3 @@ for run, t in zip(run_types, tsnr_tosave):
     print(fnout)
     fnout = f"{OUTDIR}/{fnout}"
     t_img.to_filename(fnout)
-
-
-
-
-

@@ -1,5 +1,6 @@
 """Module containing viz utils"""
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def make_mosaic(data):
@@ -16,9 +17,9 @@ def make_mosaic(data):
         mosaic matrix that can be plotted with matshow
     """
     # add an extra slice top and bottom
-    dim1, dim2, dim3 = t.shape
+    dim1, dim2, dim3 = data.shape
     empty_slice = np.zeros((dim1, dim2, 1))
-    t = np.concatenate((empty_slice, t, empty_slice), -1)
+    t = np.concatenate((empty_slice, data, empty_slice), -1)
     # split into 6 rows
     t = np.split(t, 6, -1)
     # make matrix with some magic

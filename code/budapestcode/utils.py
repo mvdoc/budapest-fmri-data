@@ -1,6 +1,7 @@
 """Module containing utils"""
 from numpy.polynomial.legendre import Legendre
 import numpy as np
+import scipy.linalg as la
 
 
 def compute_tsnr(data, conf):
