@@ -71,7 +71,7 @@ mask_fns = sorted(glob(f'{INDIR}/{subject}/func/*space-T1w_desc-brain_mask.nii.g
 # make a conjuction mask
 brainmask = np.ones_like(tsnr_runs[0])
 for mask_fn in mask_fns:
-    bm = nib.load(mask_fns[0]).get_fdata()
+    bm = nib.load(mask_fn).get_fdata()
     brainmask *= bm
 # plot it
 mat_brainmask = make_mosaic(brainmask)

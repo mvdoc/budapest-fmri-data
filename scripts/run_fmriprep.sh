@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-IMGNAME="fmriprep-20.0.1.simg"
+IMGNAME="fmriprep-20.0.5.simg"
 BASEDIR=/home/vassiki
 IMG=$BASEDIR/budapest_data/singularity/$IMGNAME
 WORKDIR=$BASEDIR/budapest_data/workdir
