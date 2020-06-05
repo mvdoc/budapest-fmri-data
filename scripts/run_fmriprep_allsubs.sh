@@ -9,7 +9,7 @@ DATADIR=/data/budapest/data
 OUTDIR=$BASEDIR/budapest_data/outputs/
 FS_LICENSE=$BASEDIR/license.txt
 
-NCORES=64
+NCORES=32
 
 if [ ! -d "$WORKDIR" ]; then
    echo "Creating $WORKDIR"
@@ -34,7 +34,7 @@ singularity run  \
   -e \
   "$IMG" \
   --bold2t1w-dof 6 \
-  --output-spaces T1w fsaverage6 \
+  --output-spaces T1w fsaverage6 fsaverage \
   --nthreads "$NCORES" \
   --omp-nthreads 8 \
   --fs-license-file "$FS_LICENSE" \
