@@ -9,13 +9,17 @@ import os
 import pandas as pd
 import scipy.linalg as la
 
+from code.budapestcode.utils import clean_data
+
 # Process is
 # 1. Load runs
 # 2. Clean up signal
 # 3. zscore runs
 # 4. stack
 # 5. compute isc
+
 data_dir = os.path.abspath('../outputs/fmriprep')
+
 
 def load_gifti(fn):
     data = nib.load(fn)
@@ -51,31 +55,6 @@ def load_confounds(subject):
         print(conf.split('/')[-1])
         confounds.append(pd.read_csv(conf, sep='\t'))
     return confounds
-
-
-def clean_data(data, confounds):
-    # make predictor matrix using confounds computed by fmriprep
-    columns = [
-        'framewise_displacement'
-    ]
-    # compcor
-    n_comp_cor = 10
-    columns += [f"a_comp_cor_{c:02d}" for c in range(n_comp_cor)]
-    # high-pass filtering
-    columns += [col for col in confounds.columns if 'cosine' in col]
-
-    X = confounds[columns].values
-    # remove nans
-    X[np.isnan(X)] = 0.
-
-    # time to clean up
-    # center the data first and store the mean
-    data_mean = data.mean(0)
-    data = data - data_mean
-    coef, _, _, _ = la.lstsq(X, data)
-    # remove trends and add back mean of the data
-    data_clean = data - X.dot(coef) + data_mean
-    return data_clean
 
 
 def zscore(array):
