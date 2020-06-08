@@ -6,7 +6,7 @@ IMG=$BASEDIR/singularity/$IMGNAME
 OUTDIR=$BASEDIR/outputs
 WORKDIR=$OUTDIR/workdir
 TMPDIR=$WORKDIR/tmp
-DATADIR="$BASEDIR"/data
+DATADIR="$BASEDIR"
 FS_LICENSE=$BASEDIR/singularity/license.txt
 
 NCORES=16
@@ -27,17 +27,17 @@ if [ ! -d "$OUTDIR" ]; then
 fi
 
 singularity run  \
-  -B "$BASEDIR":"$BASEDIR" \
+  -B /idata:/idata \
   -B "$WORKDIR":/work \
   -B "$DATADIR":/data:ro \
   -B "$OUTDIR":/out \
   -e \
   "$IMG" \
+   /data/data /out participant \
   --bold2t1w-dof 6 \
-  --output-spaces T1w fsaverage fsaverage6 \
+  --output-spaces T1w fsaverage \
   --nthreads "$NCORES" \
   --omp-nthreads 8 \
   --fs-license-file "$FS_LICENSE" \
   --participant-label "$1" \
-  -w /work \
-  /data /out participant
+  -w /work 
