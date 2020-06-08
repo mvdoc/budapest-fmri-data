@@ -1,0 +1,14 @@
+{
+  "files": [
+    "budapest_part2.mp4",
+    "budapest_part3.mp4",
+    "budapest_part4.mp4",
+    "budapest_part5.mp4"
+  ],
+  "instructions":
+    "Loading. Movie will start soon.\nSit back, relax, and enjoy the show.",
+  "task_name": "movie",
+  "log_template": "sub-{subj}_task-{task_name}_run-{runnr}_{timestamp}.txt",
+  "log_subjects": "subjectlog.tsv",
+  "fixation_s": 10
+}
