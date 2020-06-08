@@ -1,15 +1,15 @@
 #!/bin/bash -ex
 
-IMGNAME="fmriprep-20.0.5.simg"
-BASEDIR=/home/vassiki
-IMG=$BASEDIR/budapest_data/singularity/$IMGNAME
-WORKDIR=$BASEDIR/budapest_data/workdir
+IMGNAME="fmriprep-20.1.1.simg"
+BASEDIR=/idata/DBIC/castello/budapest-data-paper
+IMG=$BASEDIR/singularity/$IMGNAME
+OUTDIR=$BASEDIR/outputs
+WORKDIR=$OUTDIR/workdir
 TMPDIR=$WORKDIR/tmp
-DATADIR=/data/budapest/data
-OUTDIR=$BASEDIR/budapest_data/outputs/
-FS_LICENSE=$BASEDIR/license.txt
+DATADIR="$BASEDIR"
+FS_LICENSE=$BASEDIR/singularity/license.txt
 
-NCORES=64
+NCORES=16
 
 if [ ! -d "$WORKDIR" ]; then
    echo "Creating $WORKDIR"
@@ -27,16 +27,17 @@ if [ ! -d "$OUTDIR" ]; then
 fi
 
 singularity run  \
-  -B "$BASEDIR":"$BASEDIR" \
+  -B /idata:/idata \
   -B "$WORKDIR":/work \
-  -B "$DATADIR":/idata:ro \
+  -B "$DATADIR":/data:ro \
   -B "$OUTDIR":/out \
   -e \
   "$IMG" \
+   /data/data /out participant \
   --bold2t1w-dof 6 \
-  --output-spaces T1w fsaverage6 \
+  --output-spaces T1w fsaverage \
   --nthreads "$NCORES" \
   --omp-nthreads 8 \
   --fs-license-file "$FS_LICENSE" \
-  -w /work \
-  /idata /out participant \
+  --participant-label "$1" \
+  -w /work 
