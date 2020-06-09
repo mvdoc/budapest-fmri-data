@@ -76,7 +76,7 @@ def clean_data(data, confounds):
     # make predictor matrix using confounds computed by fmriprep
     columns = [
         'global_signal',
-        'framewise_displacement'
+        'framewise_displacement',
         'trans_x', 'trans_x_derivative1',
         'trans_y', 'trans_y_derivative1',
         'trans_z', 'trans_z_derivative1',
