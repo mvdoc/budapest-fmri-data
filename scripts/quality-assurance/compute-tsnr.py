@@ -23,12 +23,14 @@ subject = sys.argv[1]
 if not subject.startswith('sub-'):
     subject = f'sub-{subject}'
 
-INDIR = '/home/vassiki/budapest_data/outputs/fmriprep'
-OUTDIR = '/home/vassiki/budapest_data/outputs/datapaper/tsnr'
+HERE = os.path.dirname(__file__)
+
+OUTPUT_DIR = os.path.abspath(os.path.join(HERE, '../../outputs'))
+INDIR = f"{OUTPUT_DIR}/fmriprep"
+OUTDIR = f"{OUTPUT_DIR}/datapaper/tsnr"
 
 func_fns = sorted(glob(f'{INDIR}/{subject}/func/*space-T1w_desc-preproc_bold.nii.gz'))
 conf_fns = sorted(glob(f'{INDIR}/{subject}/func/*tsv'))
-
 
 # compute tSNR for every run
 tsnr_runs = []
