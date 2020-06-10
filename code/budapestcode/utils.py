@@ -5,8 +5,14 @@ import scipy.linalg as la
 
 
 def compute_tsnr(data, confounds):
-    """Compute tSNR on data by first regressing out the first 10 compcor
-    components, framewise displacement, and high-pass filtering the data.
+    """Compute tSNR on data by first regressing out the following nuisance
+    regressors:
+
+    - six motion parameters and their derivatives
+    - global signal
+    - framewise displacement
+    - six aCompCor components
+    - polynomial regressors up to second order
 
     Parameters
     ----------
@@ -36,9 +42,24 @@ def compute_tsnr(data, confounds):
     return tsnr
 
 
+def make_poly_regressors(n_samples, order=2):
+    # mean
+    X = np.ones((n_samples, 1))
+    for d in range(order):
+        poly = Legendre.basis(d + 1)
+        poly_trend = poly(np.linspace(-1, 1, n_samples))
+        X = np.hstack((X, poly_trend[:, None]))
+    return X
+
+
 def clean_data(data, confounds):
-    """Clean data by regressing out the first 10 compcor
-    components, framewise displacement, and high-pass filtering the data
+    """Clean data by regressing out the following nuisance regressors:
+
+    - six motion parameters and their derivatives
+    - global signal
+    - framewise displacement
+    - six aCompCor components
+    - polynomial regressors up to second order
 
     Parameters
     ----------
@@ -54,17 +75,24 @@ def clean_data(data, confounds):
     """
     # make predictor matrix using confounds computed by fmriprep
     columns = [
-        'framewise_displacement'
+        'global_signal',
+        'framewise_displacement',
+        'trans_x', 'trans_x_derivative1',
+        'trans_y', 'trans_y_derivative1',
+        'trans_z', 'trans_z_derivative1',
+        'rot_x', 'rot_x_derivative1',
+        'rot_y', 'rot_y_derivative1',
+        'rot_z', 'rot_z_derivative1',
     ]
     # compcor
-    n_comp_cor = 10
+    n_comp_cor = 6
     columns += [f"a_comp_cor_{c:02d}" for c in range(n_comp_cor)]
-    # high-pass filtering
-    columns += [col for col in confounds.columns if 'cosine' in col]
-
     X = confounds[columns].values
     # remove nans
     X[np.isnan(X)] = 0.
+    # add polynomial components
+    n_samples = X.shape[0]
+    X = np.hstack((X, make_poly_regressors(n_samples, order=2)))
 
     # time to clean up
     # center the data first and store the mean
