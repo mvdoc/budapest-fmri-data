@@ -33,6 +33,8 @@ func_fns = sorted(glob(f'{INDIR}/{subject}/func/*space-fsaverage_hemi-*_bold.fun
 conf_fns = sorted(glob(f'{INDIR}/{subject}/func/*tsv'))
 conf_fns = sorted(conf_fns * 2)  # we have both L,R hemispheres
 
+assert len(func_fns) == 10
+
 # compute tSNR for every run
 tsnr_runs = []
 print("Computing tSNR")
