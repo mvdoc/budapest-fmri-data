@@ -9,7 +9,7 @@ import os
 import pandas as pd
 import scipy.linalg as la
 
-from code.budapestcode.utils import clean_data
+from budapestcode.utils import clean_data
 
 # Process is
 # 1. Load runs
@@ -18,7 +18,7 @@ from code.budapestcode.utils import clean_data
 # 4. stack
 # 5. compute isc
 
-data_dir = os.path.abspath('../outputs/fmriprep')
+data_dir = os.path.abspath('../../outputs/fmriprep')
 
 
 def load_gifti(fn):
@@ -40,8 +40,8 @@ def load_data(subject):
     for irun in range(1, 6):
         data_ = []
         for hemi in ['L', 'R']:
-            print(f"  run{irun:02d}, hemi-{hemi}")
-            fn = f"{subject}_task-movie_run-{irun:02d}_space-fsaverage6_hemi-{hemi}.func.gii"
+            print(f"  run{irun:d}, hemi-{hemi}")
+            fn = f"{subject}_task-movie_run-{irun:d}_space-fsaverage_hemi-{hemi}_bold.func.gii"
             data_.append(load_gifti(os.path.join(datadir, fn)))
         data.append(np.hstack(data_))
     return data
@@ -50,7 +50,7 @@ def load_data(subject):
 def load_confounds(subject):
     datadir = f"{data_dir}/{subject}/func"
     confounds = []
-    confounds_fn = sorted(glob(f'../outputs/fmriprep/{subject}/func/*tsv'))
+    confounds_fn = sorted(glob(f'../../outputs/fmriprep/{subject}/func/*tsv'))
     for conf in confounds_fn:
         print(conf.split('/')[-1])
         confounds.append(pd.read_csv(conf, sep='\t'))
@@ -104,5 +104,5 @@ correlations = np.array(correlations)
 
 DIROUT = '../outputs/datapaper/isc'
 os.makedirs(DIROUT, exist_ok=True)
-np.save(f'{DIROUT}/isc-correlations-all-subjects.npy', correlations)
+np.save(f'{DIROUT}/isc-correlations-all-subjects-fsaverage.npy', correlations)
 
