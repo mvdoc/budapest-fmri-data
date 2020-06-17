@@ -33,5 +33,5 @@ fig.savefig('../../outputs/datapaper/isc/median-isc-fsaverage.png',
             dpi=300)
 
 fig = cortex.quickflat.make_figure(surface, with_rois=False, colorbar_location='right', height=2048)
-fig.savefig('../../outputs/datapaper/tsnr/figures/flatmap_median-isc-fsaverage.png',
+fig.savefig('../../outputs/datapaper/isc/flatmap_median-isc-fsaverage.png',
             dpi=300)
