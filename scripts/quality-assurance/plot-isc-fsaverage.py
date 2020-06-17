@@ -15,7 +15,7 @@ def get_subjects():
 
 subjects = get_subjects()
 
-data = np.load('../outputs/datapaper/isc/isc-correlations-all-subjects-fsaverage.npy')
+data = np.load('../../outputs/datapaper/isc/isc-correlations-all-subjects-fsaverage.npy')
 data_median = np.median(data, 0)
 # surfaces = dict()
 surface = cortex.Vertex(data_median, 'fsaverage', cmap='inferno', vmin=0, vmax=0.5)
