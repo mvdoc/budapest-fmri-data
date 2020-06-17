@@ -102,7 +102,7 @@ for isubject, subject in enumerate(subjects):
 
 correlations = np.array(correlations)
 
-DIROUT = '../outputs/datapaper/isc'
+DIROUT = '../../outputs/datapaper/isc'
 os.makedirs(DIROUT, exist_ok=True)
 np.save(f'{DIROUT}/isc-correlations-all-subjects-fsaverage.npy', correlations)
 
