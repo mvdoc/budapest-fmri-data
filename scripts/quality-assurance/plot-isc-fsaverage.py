@@ -18,7 +18,7 @@ subjects = get_subjects()
 data = np.load('../../outputs/datapaper/isc/isc-correlations-all-subjects-fsaverage.npy')
 data_median = np.median(data, 0)
 # surfaces = dict()
-surface = cortex.Vertex(data_median, 'fsaverage', cmap='inferno', vmin=0, vmax=0.5)
+surface = cortex.Vertex(data_median, 'fsaverage', cmap='hot', vmin=0, vmax=0.5)
 # for subject, dt in zip(subjects, data):
 #     surfaces[subject] = cortex.Vertex(dt, 'fsaverage', cmap='inferno', vmin=0, vmax=0.5)
 
@@ -29,9 +29,9 @@ viewer_params = dict(
     overlays_visible=[]
 )
 fig = cortex.export.plot_panels(surface, windowsize=windowsize, viewer_params=viewer_params, **params)
-fig.savefig('../../outputs/datapaper/isc/median-isc-fsaverage.png',
+fig.savefig('../../outputs/datapaper/isc/median-isc-fsaverage-hotcmap.png',
             dpi=300)
 
 fig = cortex.quickflat.make_figure(surface, with_rois=False, colorbar_location='right', height=2048)
-fig.savefig('../../outputs/datapaper/isc/flatmap_median-isc-fsaverage.png',
+fig.savefig('../../outputs/datapaper/isc/flatmap_median-isc-fsaverage-hotcmap.png',
             dpi=300)
