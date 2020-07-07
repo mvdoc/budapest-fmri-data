@@ -40,7 +40,7 @@ def all_sub_cols(fns, subjects):
         dfs_cols = extract_columns(dfs)
         all_df.append(dfs_cols)
         
-    return pd.concat(all_df)
+    return all_df
 
 
 def plot_one_sub(df, sids, col, outdir):
@@ -88,7 +88,13 @@ def plot_all_sub_med(df, sids, col, outdir):
 
     ax.set_xticks(pos)
     ax.set_xticklabels(sids, fontsize=12, rotation=45, ha='right')
-    ax.set_ylabel('Median {}'.format(col), fontsize=12)
+    if col == 'framewise_displacement':
+        ylabel = 'Framewise Displacement [mm]'
+        ax.axhline(0.5, color='lightgray', linestyle='dashed', zorder=0)
+    else:
+        ylabel = col
+    ax.set_ylabel('Median {}'.format(ylabel), fontsize=12)
+    sns.despine()
     plt.tight_layout()
     outfile = os.path.join(outdir, 'group_median-{}.png'.format(col))
     print("saving...")
@@ -97,15 +103,15 @@ def plot_all_sub_med(df, sids, col, outdir):
 
 
 def main():
-    indir = '/home/vassiki/budapest_data/outputs/fmriprep'
-    outdir = '/home/vassiki/budapest_data/outputs/datapaper/motion/figures'
+    indir = '../../outputs/fmriprep'
+    outdir = '../../outputs/datapaper/motion/figures'
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
     fns = sorted(glob(f'{indir}/*/func/*tsv'))
     subjects = [path.split('/')[-1].split('_')[0] for path in fns]
     subjects = sorted(list(set(subjects)))
-    dfs = all_sub_cols(fns)
+    dfs = all_sub_cols(fns, subjects)
     
     for col in ['framewise_displacement', 'rot_x', 'rot_y', 'rot_z']:
         print("Working on {}".format(col))
@@ -113,7 +119,7 @@ def main():
         print("Plotting {} for the group".format(col))
         plot_all_sub_med(df_plot, subjects, col, outdir)
         print("Now plotting {} for each subject".format(col))
-        plot_one_sub(dfs, subjects, col, outdir)
+        plot_one_sub(pd.concat(dfs), subjects, col, outdir)
         
 
 if __name__ == '__main__':
