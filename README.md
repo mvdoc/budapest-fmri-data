@@ -1,3 +1,8 @@
+
+
+[![DOI](https://zenodo.org/badge/251371344.svg)](https://zenodo.org/badge/latestdoi/251371344)
+
+
 # The Grand Budapest Hotel fMRI dataset
 
 This repository contains quality assurance analyses of fMRI data collected 
