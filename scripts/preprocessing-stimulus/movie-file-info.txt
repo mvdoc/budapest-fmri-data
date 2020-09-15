@@ -1,0 +1,116 @@
+ffmpeg version 4.1.4-1~deb10u1 Copyright (c) 2000-2019 the FFmpeg developers
+  built with gcc 8 (Debian 8.3.0-6)
+  configuration: --prefix=/usr --extra-version='1~deb10u1' --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  libavutil      56. 22.100 / 56. 22.100
+  libavcodec     58. 35.100 / 58. 35.100
+  libavformat    58. 20.100 / 58. 20.100
+  libavdevice    58.  5.100 / 58.  5.100
+  libavfilter     7. 40.101 /  7. 40.101
+  libavresample   4.  0.  0 /  4.  0.  0
+  libswscale      5.  3.100 /  5.  3.100
+  libswresample   3.  3.100 /  3.  3.100
+  libpostproc    55.  3.100 / 55.  3.100
+Input #0, matroska,webm, from 'Grandbudapesthotel_HI.mkv':
+  Metadata:
+    encoder         : libmkv 0.6.5.1
+    TITLE           : GRANDBUDAPESTHOTEL
+  Duration: 01:39:55.17, start: 0.000000, bitrate: 13049 kb/s
+    Chapter #0:0: start 0.000000, end 175.866667
+    Metadata:
+      title           : Chapter 1
+    Chapter #0:1: start 175.866667, end 360.133333
+    Metadata:
+      title           : Chapter 2
+    Chapter #0:2: start 360.133333, end 508.133333
+    Metadata:
+      title           : Chapter 3
+    Chapter #0:3: start 508.133333, end 692.600000
+    Metadata:
+      title           : Chapter 4
+    Chapter #0:4: start 692.600000, end 857.166667
+    Metadata:
+      title           : Chapter 5
+    Chapter #0:5: start 857.166667, end 1059.566667
+    Metadata:
+      title           : Chapter 6
+    Chapter #0:6: start 1059.566667, end 1196.200000
+    Metadata:
+      title           : Chapter 7
+    Chapter #0:7: start 1196.200000, end 1388.800000
+    Metadata:
+      title           : Chapter 8
+    Chapter #0:8: start 1388.800000, end 1535.400000
+    Metadata:
+      title           : Chapter 9
+    Chapter #0:9: start 1535.400000, end 1770.300000
+    Metadata:
+      title           : Chapter 10
+    Chapter #0:10: start 1770.300000, end 1931.733333
+    Metadata:
+      title           : Chapter 11
+    Chapter #0:11: start 1931.733333, end 2056.233333
+    Metadata:
+      title           : Chapter 12
+    Chapter #0:12: start 2056.233333, end 2151.633333
+    Metadata:
+      title           : Chapter 13
+    Chapter #0:13: start 2151.633333, end 2338.033333
+    Metadata:
+      title           : Chapter 14
+    Chapter #0:14: start 2338.033333, end 2418.833333
+    Metadata:
+      title           : Chapter 15
+    Chapter #0:15: start 2418.833333, end 2503.800000
+    Metadata:
+      title           : Chapter 16
+    Chapter #0:16: start 2503.800000, end 2722.733333
+    Metadata:
+      title           : Chapter 17
+    Chapter #0:17: start 2722.733333, end 2902.633333
+    Metadata:
+      title           : Chapter 18
+    Chapter #0:18: start 2902.633333, end 3113.033333
+    Metadata:
+      title           : Chapter 19
+    Chapter #0:19: start 3113.033333, end 3318.266667
+    Metadata:
+      title           : Chapter 20
+    Chapter #0:20: start 3318.266667, end 3548.533333
+    Metadata:
+      title           : Chapter 21
+    Chapter #0:21: start 3548.533333, end 3857.000000
+    Metadata:
+      title           : Chapter 22
+    Chapter #0:22: start 3857.000000, end 4114.966667
+    Metadata:
+      title           : Chapter 23
+    Chapter #0:23: start 4114.966667, end 4340.366667
+    Metadata:
+      title           : Chapter 24
+    Chapter #0:24: start 4340.366667, end 4578.800000
+    Metadata:
+      title           : Chapter 25
+    Chapter #0:25: start 4578.800000, end 4661.400000
+    Metadata:
+      title           : Chapter 26
+    Chapter #0:26: start 4661.400000, end 4847.700000
+    Metadata:
+      title           : Chapter 27
+    Chapter #0:27: start 4847.700000, end 5042.266667
+    Metadata:
+      title           : Chapter 28
+    Chapter #0:28: start 5042.266667, end 5228.466667
+    Metadata:
+      title           : Chapter 29
+    Chapter #0:29: start 5228.466667, end 5455.800000
+    Metadata:
+      title           : Chapter 30
+    Chapter #0:30: start 5455.800000, end 5577.266667
+    Metadata:
+      title           : Chapter 31
+    Chapter #0:31: start 5577.266667, end 5995.166500
+    Metadata:
+      title           : Chapter 32
+    Stream #0:0(eng): Video: h264 (High), yuv420p(tv, smpte170m/smpte170m/bt709, progressive), 720x480 [SAR 32:27 DAR 16:9], SAR 186:157 DAR 279:157, 30 fps, 30 tbr, 1k tbn, 60 tbc (default)
+    Stream #0:1(eng): Audio: ac3, 48000 Hz, stereo, fltp, 160 kb/s (default)
+    Stream #0:2(eng): Audio: ac3, 48000 Hz, 5.1(side), fltp, 384 kb/s
