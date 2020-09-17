@@ -1,3 +1,7 @@
 [submodule "outputs"]
 	path = outputs
 	url = hydra:/home/vassiki/budapest_data/outputs
+[submodule "data"]
+	path = data
+	url = http://datasets.datalad.org/labs/gobbini/budapest/openneuro/.git
+	datalad-id = 322f5aac-c52c-11ea-8255-96be0168836a
