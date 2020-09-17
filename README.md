@@ -17,13 +17,32 @@ This repository can be cited as follows:
 
 Visconti di Oleggio Castello, M., Chauhan,  V., Jiahui, G., & Gobbini, M. I. (2020).  *mvdoc/budapest-fmri-data: v0.0.1 (Version v0.0.1)*. Zenodo.  http://doi.org/10.5281/zenodo.3942174
 
-## Dataset download
+## Cloning this repository and downloading the dataset
 
-The dataset can be downloaded from [OpenNeuro, dataset ds003017]( https://openneuro.org/datasets/ds003017). Alternatively, it can be downloaded using [DataLad](https://www.datalad.org/). Once DataLad is installed in your system, the dataset can be installed as follows
+To clone this repository, simply run
+
+```bash
+$ git clone https://github.com/mvdoc/budapest-fmri-data.git
+```
+
+The OpenNeuro dataset is included in this repository as a git submodule, and it can be downloaded with [DataLad](https://www.datalad.org/) (see also the next section). Once you have cloned the repository, obtaining the data is as simple as
+
+```bash
+$ cd budapest-fmri-data
+$ datalad install data
+# If for example you want to download the data from one subject, you can run
+$ datalad get data/sub-sid000005
+# Alternatively, to get all the data, you can run
+$ datalad get data
+```
+
+The dataset can be installed from [DataLad](https://www.datalad.org/) to a different location by running
 
 ```bash
 $ datalad install ///labs/gobbini/budapest/openneuro
 ```
+
+Or it can be downloaded from the [OpenNeuro's website, dataset ds003017]( https://openneuro.org/datasets/ds003017). 
 
 Please refer to the [DataLad handbook](http://handbook.datalad.org/en/latest/) to learn how to use DataLad.
 
