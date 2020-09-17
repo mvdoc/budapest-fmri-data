@@ -152,3 +152,7 @@ In [`scripts/preprocessing-fmri`](scripts/preprocessing-fmri) we provide the scr
 ### Quality assurance scripts
 
 ### Hyperalignment and decoding scripts
+
+## Acknowledgements
+
+This work was supported by the [NSF grant #1835200](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1835200) to M. Ida Gobbini. We would like to thank Jim Haxby, Yaroslav Halchenko, Sam Nastase, and the members of the Gobbini and Haxby lab for helpful discussions during the development of this project.
