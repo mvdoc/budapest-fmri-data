@@ -1,6 +1,3 @@
 [submodule "outputs"]
 	path = outputs
 	url = hydra:/home/vassiki/budapest_data/outputs
-[submodule "data"]
-	path = data
-	url = hydra:/data/budapest/data
