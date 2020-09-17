@@ -139,6 +139,8 @@ onset	duration	frameidx	videotime	lasttrigger
 
 The available columns are `onset` (frame onset); `duration` (containing a python format string so that duration information can be added with a trivial parser); `frameidx` (index of the frame shown); `videotime` (time of the video); `lasttrigger` (time of the last received trigger).
 
+We provide a simplified events file with the published BIDS dataset. These events file were generated in the notebook  [`notebooks/2020-06-08_make-event-files.ipynb`](notebooks/2020-06-08_make-event-files.ipynb).
+
 ### fMRI preprocessing with fMRIprep
 
 The dataset was preprocessed using [fMRIprep](https://fmriprep.org) (version 20.1.1) in a singularity container. To obtain the container, run the following line (assuming you have singularity installed):
@@ -155,7 +157,11 @@ We performed QA analyses looking at subject's motion, temporal SNR (tSNR), inter
 
 The script [`scripts/quality-assurance/compute_motion.py`](scripts/quality-assurance/compute_motion.py) and notebook  [`notebooks/2020-07-07_compute-outliers-and-median-motion.ipynb`](notebooks/2020-07-07_compute-outliers-and-median-motion.ipynb) were used to inspect subject's motion across subjects and to compute additional metrics.
 
-The scripts [`scripts/quality-assurance/compute-tsnr-volume.py`](scripts/quality-assurance/compute-tsnr-volume.py) and [`scripts/quality-assurance/compute-tsnr-fsaverage.py`](scripts/quality-assurance/compute-tsnr-fsaverage.py) were respectively used to estimate tSNR in the subject's native space (volume) and in fsaverage. The scripts load the fMRIprep-processed data and perform denoising (as described in the manuscript and implemented in [`budapestcode.utils.clean_data`](https://github.com/mvdoc/budapest-fmri-data/blob/7b9059a1ead5002368487d8376c7345acc4e5511/code/budapestcode/utils.py#L55)) prior to computing tSNR. Example mosaic plots of tSNR for one subject are shown in [`notebooks/]
+The scripts [`scripts/quality-assurance/compute-tsnr-volume.py`](scripts/quality-assurance/compute-tsnr-volume.py) and [`scripts/quality-assurance/compute-tsnr-fsaverage.py`](scripts/quality-assurance/compute-tsnr-fsaverage.py) were used to estimate tSNR in the subject's native space (volume) and in fsaverage. The scripts load the fMRIprep-processed data and perform denoising (as described in the manuscript and implemented in [`budapestcode.utils.clean_data`](https://github.com/mvdoc/budapest-fmri-data/blob/7b9059a1ead5002368487d8376c7345acc4e5511/code/budapestcode/utils.py#L55)) prior to computing tSNR. The tSNR values in volumetric space are plotted in a violin plot across subjects in [`notebooks/2020-04-04_plot-tsnr-group.ipynb`](notebooks/2020-04-04_plot-tsnr-group.ipynb). The script [`scripts/quality-assurance/plot-tsnr-fsaverage.py`](scripts/quality-assurance/plot-tsnr-fsaverage.py) plots the median tSNR across subjects on fsaverage using [pycortex](https://gallantlab.github.io/pycortex).
+
+The script  [`scripts/quality-assurance/compute-isc-fsaverage.py`](scripts/quality-assurance/compute-isc-fsaverage.py) computes inter-subject correlation on data projected to fsaverage, after denoising the data as described in the manuscript. The median ISC across subjects is plotted with [pycortex](https://gallantlab.github.io/pycortex) in [`scripts/quality-assurance/plot-isc-fsaverage.py`](scripts/quality-assurance/plot-isc-fsaverage.py).
+
+The data was hyperaligned with [PyMVPA](https://www.pymvpa.org) using the script [`scripts/hyperalignment-and-decoding/hyperalignment_pymvpa_splits.py`](scripts/hyperalignment-and-decoding/hyperalignment_pymvpa_splits.py) and time-segment classification across subjects was performed using the script [`scripts/hyperalignment-and-decoding/decoding_segments_splits.py`](scripts/hyperalignment-and-decoding/decoding_segments_splits.py). Please refer to the manuscript for more details on these analyses.
 
 ## Acknowledgements
 
