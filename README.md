@@ -71,7 +71,7 @@ In this repository we provide the scripts used to generate and preprocess the st
 - [`scripts/preprocessing-fmri`](scripts/preprocessing-fmri) contains the scripts used to run [fMRIprep](https://fmriprep.readthedocs.io/) for preprocessing.
 - [`scripts/quality-assurance`](scripts/quality-assurance) contains scripts to run QA analyses and generate the figures reported in the data paper.
 - [`scripts/hyperalignment-and-decoding`](hyperalignment-and-decoding) contains scripts to perform hyperalignment and movie segment classification.
-- [`notebooks`](notebooks) contains jupyter notebooks for generating figures.
+- [`notebooks`](notebooks) contains jupyter notebooks to generate figures and run additional analyses.
 
 Below we describe the content of these directories and their role in the analyses.
 
