@@ -151,7 +151,11 @@ In [`scripts/preprocessing-fmri`](scripts/preprocessing-fmri) we provide the scr
 
 ### Quality assurance scripts
 
-### Hyperalignment and decoding scripts
+We performed QA analyses looking at subject's motion, temporal SNR (tSNR), inter-subject correlation (ISC), and time-segment classification after hyperalignment. Please refer to the manuscript for more details.
+
+The script [`scripts/quality-assurance/compute_motion.py`](scripts/quality-assurance/compute_motion.py) and notebook  [`notebooks/2020-07-07_compute-outliers-and-median-motion.ipynb`](notebooks/2020-07-07_compute-outliers-and-median-motion.ipynb) were used to inspect subject's motion across subjects and to compute additional metrics.
+
+The scripts [`scripts/quality-assurance/compute-tsnr-volume.py`](scripts/quality-assurance/compute-tsnr-volume.py) and [`scripts/quality-assurance/compute-tsnr-fsaverage.py`](scripts/quality-assurance/compute-tsnr-fsaverage.py) were respectively used to estimate tSNR in the subject's native space (volume) and in fsaverage. The scripts load the fMRIprep-processed data and perform denoising (as described in the manuscript and implemented in [`budapestcode.utils.clean_data`](https://github.com/mvdoc/budapest-fmri-data/blob/7b9059a1ead5002368487d8376c7345acc4e5511/code/budapestcode/utils.py#L55)) prior to computing tSNR. Example mosaic plots of tSNR for one subject are shown in [`notebooks/]
 
 ## Acknowledgements
 
