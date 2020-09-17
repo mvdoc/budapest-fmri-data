@@ -5,21 +5,19 @@
 
 # An fMRI dataset in response to "The Grand Budapest Hotel", a socially-rich, naturalistic movie
 
-This repository contains code related to the fMRI dataset collected while participants watched [The Grand BudapestHotel](https://en.wikipedia.org/wiki/The_Grand_Budapest_Hotel) by Wes Anderson. The associated manuscript *An fMRI dataset in response to "The Grand Budapest Hotel", a socially-rich, naturalistic movie* by Matteo Visconti di Oleggio Castello, Vassiki Chauhan, Guo Jiahui, & M. Ida Gobbini is available as a preprint [here](https://www.biorxiv.org/content/10.1101/2020.07.14.203257v1).
+This repository contains quality-assurance scripts for an fMRI dataset collected while 25 participants watched [The Grand Budapest Hotel](https://en.wikipedia.org/wiki/The_Grand_Budapest_Hotel) by Wes Anderson. The associated manuscript *An fMRI dataset in response to "The Grand Budapest Hotel", a socially-rich, naturalistic movie* by Matteo Visconti di Oleggio Castello, Vassiki Chauhan, Guo Jiahui, & M. Ida Gobbini is available as a preprint [here](https://www.biorxiv.org/content/10.1101/2020.07.14.203257v1).
 
-If you use the dataset, please cite the corresponding preprint:
+The dataset is available on OpenNeuro: https://openneuro.org/datasets/ds003017. See below for information on how to install the dataset. If you use the dataset, please cite the corresponding preprint:
 
-Visconti di Oleggio Castello, M., Chauhan, V., Jiahui, G., & Gobbini, M. I. (2020). *An fMRI dataset in response to "The Grand Budapest Hotel", a socially-rich, naturalistic movie*. In bioRxiv (p. 2020.07.14.203257). https://doi.org/10.1101/2020.07.14.203257
+> Visconti di Oleggio Castello, M., Chauhan, V., Jiahui, G., & Gobbini, M. I. (2020). *An fMRI dataset in response to "The Grand Budapest Hotel", a socially-rich, naturalistic movie*. In bioRxiv (p. 2020.07.14.203257). https://doi.org/10.1101/2020.07.14.203257
 
-The dataset is available on OpenNeuro: https://openneuro.org/datasets/ds003017. See below for information on how to install the dataset.
+This repository and associated code can be cited as follows:
 
-This repository can be cited as follows:
-
-Visconti di Oleggio Castello, M., Chauhan,  V., Jiahui, G., & Gobbini, M. I. (2020).  *mvdoc/budapest-fmri-data: v0.0.1 (Version v0.0.1)*. Zenodo.  http://doi.org/10.5281/zenodo.3942174
+> Visconti di Oleggio Castello, M., Chauhan,  V., Jiahui, G., & Gobbini, M. I. (2020).  *mvdoc/budapest-fmri-data: v0.0.1 (Version v0.0.1)*. Zenodo.  http://doi.org/10.5281/zenodo.3942174
 
 ## Cloning this repository and downloading the dataset
 
-To clone this repository, simply run
+To clone this repository, run
 
 ```bash
 $ git clone https://github.com/mvdoc/budapest-fmri-data.git
@@ -36,7 +34,7 @@ $ datalad get data/sub-sid000005
 $ datalad get data
 ```
 
-The dataset can be installed from [DataLad](https://www.datalad.org/) to a different location by running
+The dataset can also be installed from [DataLad](https://www.datalad.org/) to a different location by running
 
 ```bash
 $ datalad install ///labs/gobbini/budapest/openneuro
@@ -73,12 +71,13 @@ In this repository we provide the scripts used to generate and preprocess the st
 - [scripts/preprocessing-fmri](scripts/preprocessing-fmri) contains the scripts used to run [fMRIprep](https://fmriprep.readthedocs.io/) for preprocessing.
 - [scripts/quality-assurance](scripts/quality-assurance) contains scripts to run QA analyses and generate the figures reported in the data paper.
 - [scripts/hyperalignment-and-decoding](hyperalignment-and-decoding) contains scripts to perform hyperalignment and movie segment classification.
+- [`notebooks`](notebooks) contains jupyter notebooks for generating figures.
 
-Below we describe the content of these directories in more detail.
+Below we describe the content of these directories and their role in the analyses.
 
 ### Stimulus preprocessing
 
-The movie was extracted from a DVD and converted into mkv (`libmkv 0.6.5.1`) format using [HandBrake](https://handbrake.fr/). Unfortunately, this process was not scripted. The DVD had [UPC code 024543897385](https://www.upcitemdb.com/upc/24543897385). We provide additional metadata associated with the converted movie file to make sure that future conversions would match our stimuli as best as possible. The information is available in [`scripts/preprocessing-stimulus/movie-file-info.txt`](scripts/preprocessing-stimulus/movie-file-info.txt). In particular, the total video duration was `01:39:55.17`. The video and audio were encoded with the following codecs:
+The movie was extracted from a DVD and converted into mkv (`libmkv 0.6.5.1`) format using [HandBrake](https://handbrake.fr/). Unfortunately, this process was not scripted. The DVD had [UPC code 024543897385](https://www.upcitemdb.com/upc/24543897385). We provide additional metadata associated with the converted movie file to make sure that future conversions would match our stimuli as best as possible. The information is available in [`scripts/preprocessing-stimulus/movie-file-info.txt`](scripts/preprocessing-stimulus/movie-file-info.txt). The total duration of the movie was `01:39:55.17`. The video and audio were encoded with the following codecs:
 
 ```
 Stream #0:0(eng): Video: h264 (High), yuv420p(tv, smpte170m/smpte170m/bt709, progressive), 720x480 [SAR 32:27 DAR 16:9], SAR 186:157 DAR 279:157, 30 fps, 30 tbr, 1k tbn, 60 tbc (default)
@@ -86,21 +85,21 @@ Stream #0:1(eng): Audio: ac3, 48000 Hz, stereo, fltp, 160 kb/s (default)
 Stream #0:2(eng): Audio: ac3, 48000 Hz, 5.1(side), fltp, 384 kb/s
 ```
 
-Once the movie was extracted and converted, it was split into different parts for a behavioral session and five imaging runs. The times for the behavioral session are available in [`scripts/preprocessing-stimulus/splits_behav.txt`](scripts/preprocessing-stimulus/splits_behav.txt). These first ~45 minutes of the movie were shown outside the scanner, right before the imaging session. The times of the five additional splits of the second part of the movie are available in [`scripts/preprocessing-stimulus/splits.txt`](scripts/preprocessing-stimulus/splits.txt). Each row indicates a pair of start/end times for each subclip.
+Once the movie was extracted and converted, it was split into different parts for a behavioral session and five imaging runs. The times for the behavioral session are available in [`scripts/preprocessing-stimulus/splits_behav.txt`](scripts/preprocessing-stimulus/splits_behav.txt). These first ~45 minutes of the movie were shown outside the scanner, right before the imaging session. The times of the five additional splits of the second part of the movie are available in [`scripts/preprocessing-stimulus/splits.txt`](scripts/preprocessing-stimulus/splits.txt). Each row indicates a pair of start/end times for each split.
 
-We also provide the scripts used to generate these splits, which used `ffmpeg`. While the movies were converted, the audio was also postprocessed and passed through an audio compressor to reduce the dynamic range and make dialogues more audible in the scanner. These scripts are  [`scripts/preprocessing-stimulus/split_movie_behav.sh`](scripts/preprocessing-stimulus/split_movie_behav.sh) and [`scripts/preprocessing-stimulus/split_movie.sh`](scripts/preprocessing-stimulus/split_movie.sh) for the behavioral and imaging sessions respectively. They will produce six files named `budapest_part[1-6].mp4` that were used for the experiment.
+We also provide the scripts used to generate these splits, which used `ffmpeg`. While the movies were converted, the audio was also postprocessed and passed through an audio compressor to reduce the dynamic range and make dialogues more audible in the scanner. These scripts are  [`scripts/preprocessing-stimulus/split_movie_behav.sh`](scripts/preprocessing-stimulus/split_movie_behav.sh) and [`scripts/preprocessing-stimulus/split_movie.sh`](scripts/preprocessing-stimulus/split_movie.sh), for the behavioral and imaging sessions respectively. They produce six files named `budapest_part[1-6].mp4` that were used for the experiment.
 
-During the first anatomical scan, subjects were shown the last five minutes of `budapest_part1.mp4` so that they could select an appropriate volume for the remaining five scans. The clip showed during the anatomical scan is generated by the script [`scripts/preprocessing-stimulus/split_part1_soundcheck.sh`](scripts/preprocessing-stimulus/split_part1_soundcheck). This script will generate a file named `budapest_soundcheck.mp4`. 
+During the first anatomical scan, subjects were shown the last five minutes of `budapest_part1.mp4` so that they could select an appropriate volume for the remaining five functional scans. The clip showed during the anatomical scan is generated by the script [`scripts/preprocessing-stimulus/split_part1_soundcheck.sh`](scripts/preprocessing-stimulus/split_part1_soundcheck). This script generates a file named `budapest_soundcheck.mp4`. 
 
 ### Presentation scripts
 
-For the behavioral session outside the scanner, subjects were  shown `budapest_part1.mp4` (generated as described above) using VLC and high-quality headphones. They were free to adjust the volume as much as they liked, and no instructions were given.
+For the behavioral session outside the scanner, subjects were  shown `budapest_part1.mp4` (generated as described above) using VLC and high-quality headphones. Subjects could adjust the volume as much as they liked, and no instructions were given.
 
 All presentation scripts used [PsychoPy](https://www.psychopy.org/). Unfortunately, we are unable to access the computer used for presentation, so we cannot provide the specific version used in our experiment. Any recent version of PsychoPy should be able to run the presentation code. Feel free to open an issue on this repository if you encounter problems.
 
 All presentation scripts assume that the stimuli are placed in a subdirectory named `stim`.
 
-During the anatomical scan, subjects were shown the last five minutes of the part they just saw to select an appropriate volume level. The presentation script used for this run is [`scripts/presentation/soundcheck.py`](scripts/presentation/soundcheck.py). The subject can decrease/increase the volume using the buttons `1` and `2` respectively. Once the script has run, it will save the volume information in a json file called `subjectvolume.json`. An example of this file will look like as follows
+During the anatomical scan, subjects were shown the last five minutes of the part they saw outside the scanner. This was done so that subjects could select an appropriate volume. The presentation script used for this run is [`scripts/presentation/soundcheck.py`](scripts/presentation/soundcheck.py). The subject can decrease/increase the volume using the buttons `1` and `2` respectively. Once the script has run, it saves the volume level in a json file called `subjectvolume.json`. This is an example of such file
 
 ```json
 {
@@ -110,9 +109,9 @@ During the anatomical scan, subjects were shown the last five minutes of the par
 }
 ```
 
-The presentation script used for the functional imaging runs is [`scripts/presentation/show_movie.py`](scripts/presentation/show_movie.py). Some (limited) config values can be defined in the config json file [`scripts/presentation/config.json`](scripts/presentation/config.json). Once the presentation script is run, it will show a dialog box to select the subject id and the run number. The volume will be automatically selected by loading the volume information stored in `subjectvolume.json`. Log files will be stored in a subdirectory named `res`. It is possible to stop the experiment at any point using `CTRL + q`. In that case, the logs will be flushed, saved, and moved to a file with suffix `__halted.txt`. 
+The presentation script used for the functional imaging runs is [`scripts/presentation/show_movie.py`](scripts/presentation/show_movie.py). Some (limited) config values can be defined in the config json file [`scripts/presentation/config.json`](scripts/presentation/config.json). Once the presentation script is loaded, it shows a dialog box to select the subject id and the run number. The volume is automatically selected by loading the volume information stored in `subjectvolume.json`. Log files are stored in a subdirectory named `res`. It's possible to stop the experiment at any point using `CTRL + q`. In that case, the logs are flushed, saved, and moved to a file with suffix `__halted.txt`. 
 
-The logs save detailed timing information (perhaps eccessive) about each frame. By default, useful information for extracting event files is logged with a `BIDS` log level. Thus, one can easily generate a detailed events file by simply grepping `BIDS`. For example
+The logs save detailed timing information (perhaps eccessive) about each frame. By default, useful information for extracting event files is logged with a `BIDS` log level. Thus, one can easily generate a detailed events file by grepping `BIDS`. For example
 
 ```bash
 $ grep BIDS sub-test_task-movie_run-1_20200916T114100.txt | awk '{for (i=3; i<NF; i++) printf $i"\t";print $NF}' | head -20
@@ -142,16 +141,14 @@ The available columns are `onset` (frame onset); `duration` (containing a python
 
 ### fMRI preprocessing with fMRIprep
 
-The dataset was preprocessed using [fMRIprep](https://fmriprep.org) (version 20.1.1) in a singularity container. To obtain the container, simply run the following line (assuming you have singularity installed):
+The dataset was preprocessed using [fMRIprep](https://fmriprep.org) (version 20.1.1) in a singularity container. To obtain the container, run the following line (assuming you have singularity installed):
 
 ```bash
 VERSION="20.1.1"; singularity build fmriprep-"$VERSION".simg docker://poldracklab/fmriprep:"$VERSION"
 ```
 
-In [`scripts/preprocessing-fmri`](scripts/preprocessing-fmri) we provide the scripts that were used to run fMRIprep on the Dartmouth HPC cluster ([Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/)). Please use those as an example and refer to the documentation of fMRIprep for more details on preprocessing.
+In [`scripts/preprocessing-fmri`](scripts/preprocessing-fmri) we provide the scripts that were used to run fMRIprep on the Dartmouth HPC cluster ([Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/)). Please consider those scripts as an example, and refer to the documentation of fMRIprep for more details on preprocessing.
 
 ### Quality assurance scripts
 
 ### Hyperalignment and decoding scripts
-
-## Notebooks
