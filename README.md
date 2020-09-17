@@ -129,7 +129,7 @@ The dataset was preprocessed using [fMRIprep](https://fmriprep.org) (version 20.
 VERSION="20.1.1"; singularity build fmriprep-"$VERSION".simg docker://poldracklab/fmriprep:"$VERSION"
 ```
 
-We provide the scripts that were used to run fMRIprep on the Dartmouth HPC cluster ([Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/)). Please use those as an example and refer to the documentation of fMRIprep for more details on preprocessing.
+In [`scripts/preprocessing-fmri`](scripts/preprocessing-fmri) we provide the scripts that were used to run fMRIprep on the Dartmouth HPC cluster ([Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/)). Please use those as an example and refer to the documentation of fMRIprep for more details on preprocessing.
 
 ### Quality assurance scripts
 
