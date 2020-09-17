@@ -77,7 +77,7 @@ During the first anatomical scan, subjects were shown the last five minutes of `
 
 For the behavioral session outside the scanner, subjects were  shown `budapest_part1.mp4` (generated as described above) using VLC and high-quality headphones. They were free to adjust the volume as much as they liked, and no instructions were given.
 
-All presentation scripts used [PsychoPy](https://www.psychopy.org/). Unfortunately, we are unable to acess the computer used for presentation, so we cannot provide the specific version used in our experiment. Any recent version of PsychoPy should be able to run the presentation code. Feel free to open an issue on this repository if you encounter problems.
+All presentation scripts used [PsychoPy](https://www.psychopy.org/). Unfortunately, we are unable to access the computer used for presentation, so we cannot provide the specific version used in our experiment. Any recent version of PsychoPy should be able to run the presentation code. Feel free to open an issue on this repository if you encounter problems.
 
 All presentation scripts assume that the stimuli are placed in a subdirectory named `stim`.
 
