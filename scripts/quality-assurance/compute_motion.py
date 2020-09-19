@@ -63,7 +63,7 @@ def plot_one_sub(df, sids, col, outdir):
 
         ax.set_xticks(pos)
         ax.set_xticklabels(['run-{}'.format(r) for r in range(1,6)], fontsize=12, ha='right')
-        ax.set_ylabel('Median {0} for {1}'.format(sid, col), fontsize=12)
+        ax.set_ylabel('{0} for {1}'.format(col, sid), fontsize=12)
         plt.tight_layout()
         
         
@@ -87,13 +87,13 @@ def plot_all_sub_med(df, sids, col, outdir):
         parts[p].set_edgecolor('black')
 
     ax.set_xticks(pos)
-    ax.set_xticklabels(sids, fontsize=12, rotation=45, ha='right')
+    ax.set_xticklabels(sids, fontsize=16, rotation=45, ha='right')
     if col == 'framewise_displacement':
         ylabel = 'Framewise Displacement [mm]'
         ax.axhline(0.5, color='lightgray', linestyle='dashed', zorder=0)
     else:
         ylabel = col
-    ax.set_ylabel('Median {}'.format(ylabel), fontsize=12)
+    ax.set_ylabel(ylabel, fontsize=16)
     sns.despine()
     plt.tight_layout()
     outfile = os.path.join(outdir, 'group_median-{}.png'.format(col))
@@ -118,8 +118,8 @@ def main():
         df_plot = [df[col].values for df in dfs]
         print("Plotting {} for the group".format(col))
         plot_all_sub_med(df_plot, subjects, col, outdir)
-        print("Now plotting {} for each subject".format(col))
-        plot_one_sub(pd.concat(dfs), subjects, col, outdir)
+        # print("Now plotting {} for each subject".format(col))
+        # plot_one_sub(pd.concat(dfs), subjects, col, outdir)
         
 
 if __name__ == '__main__':
