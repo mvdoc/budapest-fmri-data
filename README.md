@@ -13,7 +13,7 @@ The dataset is available on OpenNeuro: https://openneuro.org/datasets/ds003017. 
 
 This repository and associated code can be cited as follows:
 
-> Visconti di Oleggio Castello, M., Chauhan,  V., Jiahui, G., & Gobbini, M. I. (2020).  *mvdoc/budapest-fmri-data: v0.0.1 (Version v0.0.1)*. Zenodo.  http://doi.org/10.5281/zenodo.3942174
+> Visconti di Oleggio Castello, M., Chauhan,  V., Jiahui, G., & Gobbini, M. I. (2020).  *mvdoc/budapest-fmri-data*. Zenodo.  http://doi.org/10.5281/zenodo.3942173
 
 ## Cloning this repository and downloading the dataset
 
